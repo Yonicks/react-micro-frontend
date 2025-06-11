@@ -16,19 +16,38 @@ const SharedButton = React.lazy(() => import("host/SharedButton"));
 
 function App() {
     const greeting = useUserGreeting(mockUser);
-    const theme = useTheme();
+    const { theme, toggleTheme } = useTheme();
 
 
     return (
         <div>
-            <div style={{
-                background: theme.colors.background,
-                color: theme.colors.text,
-                fontFamily: theme.font.family,
-                fontSize: theme.font.size,
-                padding: 24
-            }}>
-                Host App with Shared Theme!
+            <div
+                style={{
+                    background: theme.colors.background,
+                    color: theme.colors.text,
+                    fontFamily: theme.font.family,
+                    fontSize: theme.font.size,
+                    padding: 24,
+                    minHeight: "100vh",
+                    transition: "background 0.3s, color 0.3s",
+                }}
+            >
+                Remote App with Shared Theme!
+                <br />
+                <button
+                    style={{
+                        background: theme.colors.primary,
+                        color: theme.colors.secondary,
+                        border: "none",
+                        padding: "10px 20px",
+                        borderRadius: 6,
+                        marginTop: 16,
+                        cursor: "pointer",
+                    }}
+                    onClick={toggleTheme}
+                >
+                    Toggle Light/Dark
+                </button>
             </div>
             <div>
                 {greeting}
