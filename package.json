@@ -1,8 +1,14 @@
 {
   "private": true,
+  "scripts": {
+    "check:remotes": "node check-remote-entry.mjs"
+  },
   "workspaces": [
     "host",
     "remote",
     "shared"
-  ]
+  ],
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
 }
