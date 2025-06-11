@@ -10,7 +10,9 @@ export default defineConfig({
       remotes: {
         remote: 'http://localhost:3001/assets/remoteEntry.js',
       },
-
+      exposes: {
+        "./SharedButton": "./src/SharedButton.tsx",
+      },
       shared: ['react', 'react-dom'],
     }),
   ],

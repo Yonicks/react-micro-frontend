@@ -7,6 +7,9 @@ export default defineConfig({
     react(),
     federation({
       name: 'remote',
+      remotes: {
+        host: "http://localhost:3000/assets/remoteEntry.js",
+      },
       filename: 'remoteEntry.js',
       exposes: {
         './HelloWorld': './src/HelloWorld.tsx',
