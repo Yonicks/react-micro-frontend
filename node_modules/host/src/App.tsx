@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 const RemoteHelloWorld = React.lazy(() => import("remote/HelloWorld"));
-import { APP_NAME } from "shared/src/constants";
+import { APP_NAME, APP_GRETTINGS} from "shared/src/constants";
 import type {User} from "shared/src/types";
 import { capitalize, formatEmail } from "shared/src/utils";
 import { useUserGreeting } from "shared/src/hooks/useUserGreeting";
@@ -50,7 +50,7 @@ export default function App() {
     return (
         <div className="App">
             <div>
-                <h2>Host App</h2>
+                <h2>{APP_GRETTINGS} Host App</h2>
                 <div>Theme: {theme}</div>
                 <button onClick={toggleTheme}>Toggle Theme</button>
                 <br /><br />

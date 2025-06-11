@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { APP_NAME } from "shared/src/constants";
+import { APP_NAME, APP_GRETTINGS} from "shared/src/constants";
 import type {User} from "shared/src/types";
 import { capitalize, formatEmail } from "shared/src/utils";
 import { useUserGreeting } from "shared/src/hooks/useUserGreeting";
@@ -47,7 +47,7 @@ function App() {
     return (
         <div>
             <div>
-                <h2>Remote App</h2>
+                <h2>{APP_GRETTINGS} Remote App</h2>
                 <div>Theme: {theme}</div>
                 <div>User: {user ? user.name : "None"}</div>
                 <div>
