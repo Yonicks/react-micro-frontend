@@ -3,8 +3,8 @@ import { APP_NAME } from "shared/src/constants";
 import type {User} from "shared/src/types";
 import { capitalize, formatEmail } from "shared/src/utils";
 import { useUserGreeting } from "shared/src/hooks/useUserGreeting";
-import { useTheme } from "shared/src/ThemeContext";
 import { useApi } from "../../shared/src/hooks/useApi";
+import { useSharedStore } from "shared/src/store";
 
 
 const mockUser: User = {
@@ -35,46 +35,64 @@ const SharedButton = React.lazy(() => import("host/SharedButton"));
 
 function App() {
     const greeting = useUserGreeting(mockUser);
-    const { theme, toggleTheme } = useTheme();
+    // const { theme, toggleTheme } = useTheme();
     const { data, loading, error } = useApi<User>("https://jsonplaceholder.typicode.com/users/1");
+
+    const user = useSharedStore((state) => state.user);
+    const theme = useSharedStore((state) => state.theme);
+    const notification = useSharedStore((state) => state.notification);
+    const setNotification = useSharedStore((state) => state.setNotification);
 
 
     return (
         <div>
             <div>
                 <h2>Remote App</h2>
+                <div>Theme: {theme}</div>
+                <div>User: {user ? user.name : "None"}</div>
+                <div>
+                    Notification: {notification ?? "None"}
+                    <button onClick={() => setNotification("Hello from Remote!")}>
+                        Show Notification
+                    </button>
+                </div>
+            </div>
+
+
+            <div>
+                <h2>Remote App</h2>
                 {loading && "Loading..."}
                 {error && <div style={{color: "red"}}>{error.message}</div>}
                 {data && <div>Predicted website for Yoni: {data.website}</div>}
             </div>
-            <div
-                style={{
-                    background: theme.colors.background,
-                    color: theme.colors.text,
-                    fontFamily: theme.font.family,
-                    fontSize: theme.font.size,
-                    padding: 24,
-                    minHeight: "100vh",
-                    transition: "background 0.3s, color 0.3s",
-                }}
-            >
-                Remote App with Shared Theme!
-                <br />
-                <button
-                    style={{
-                        background: theme.colors.primary,
-                        color: theme.colors.secondary,
-                        border: "none",
-                        padding: "10px 20px",
-                        borderRadius: 6,
-                        marginTop: 16,
-                        cursor: "pointer",
-                    }}
-                    onClick={toggleTheme}
-                >
-                    Toggle Light/Dark
-                </button>
-            </div>
+            {/*<div*/}
+            {/*    style={{*/}
+            {/*        background: theme.colors.background,*/}
+            {/*        color: theme.colors.text,*/}
+            {/*        fontFamily: theme.font.family,*/}
+            {/*        fontSize: theme.font.size,*/}
+            {/*        padding: 24,*/}
+            {/*        minHeight: "100vh",*/}
+            {/*        transition: "background 0.3s, color 0.3s",*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*    Remote App with Shared Theme!*/}
+            {/*    <br />*/}
+            {/*    <button*/}
+            {/*        style={{*/}
+            {/*            background: theme.colors.primary,*/}
+            {/*            color: theme.colors.secondary,*/}
+            {/*            border: "none",*/}
+            {/*            padding: "10px 20px",*/}
+            {/*            borderRadius: 6,*/}
+            {/*            marginTop: 16,*/}
+            {/*            cursor: "pointer",*/}
+            {/*        }}*/}
+            {/*        onClick={toggleTheme}*/}
+            {/*    >*/}
+            {/*        Toggle Light/Dark*/}
+            {/*    </button>*/}
+            {/*</div>*/}
             <div>
                 {greeting}
             </div>

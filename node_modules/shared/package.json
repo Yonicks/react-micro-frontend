@@ -4,7 +4,8 @@
   "main": "src/constants.ts",
   "types": "src/types.ts",
   "dependencies": {
-    "react": "^19.1.0"
+    "react": "^19.1.0",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@types/react": "^19.1.8"
