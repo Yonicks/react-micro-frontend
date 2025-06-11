@@ -3,6 +3,7 @@ import { APP_NAME } from "shared/src/constants";
 import type {User} from "shared/src/types";
 import { capitalize, formatEmail } from "shared/src/utils";
 import { useUserGreeting } from "shared/src/hooks/useUserGreeting";
+import { useTheme } from "shared/src/ThemeContext";
 
 
 const mockUser: User = {
@@ -15,10 +16,20 @@ const SharedButton = React.lazy(() => import("host/SharedButton"));
 
 function App() {
     const greeting = useUserGreeting(mockUser);
+    const theme = useTheme();
 
 
     return (
         <div>
+            <div style={{
+                background: theme.colors.background,
+                color: theme.colors.text,
+                fontFamily: theme.font.family,
+                fontSize: theme.font.size,
+                padding: 24
+            }}>
+                Host App with Shared Theme!
+            </div>
             <div>
                 {greeting}
             </div>
