@@ -3,6 +3,7 @@ const RemoteHelloWorld = React.lazy(() => import("remote/HelloWorld"));
 import { APP_NAME } from "shared/src/constants";
 import type {User} from "shared/src/types";
 import { capitalize, formatEmail } from "shared/src/utils";
+import { useUserGreeting } from "shared/src/hooks/useUserGreeting";
 
 const mockUser: User = {
     id: "1",
@@ -12,8 +13,13 @@ const mockUser: User = {
 
 
 export default function App() {
+    const greeting = useUserGreeting(mockUser);
+
     return (
         <div className="App">
+            <div>
+                {greeting}
+            </div>
             <div>
                 Welcome, {capitalize(mockUser.name)}!
                 <br />
